@@ -26,7 +26,7 @@ function Login(){
         "data": payload
       }
     })
-    debugger
+    //debugger
     const res = await response.json()
   }
 
