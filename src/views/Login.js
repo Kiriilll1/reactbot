@@ -1,5 +1,8 @@
 import { wait } from "@testing-library/user-event/dist/utils"
-import { useEffect, useState, useRef, } from "react"
+import axios from "../axiosclient"
+import { useEffect, useState, useRef} from "react"
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import axiosClient from "../axiosclient"
 
 
 function Login(){
@@ -7,41 +10,41 @@ function Login(){
   const last_nameRef=useRef()
   const emailRef=useRef()
   const phoneRef=useRef()
+  const navigate = useNavigate()
+
+  const routerParams = useParams()
   
   const onSubmit= async (ev) =>{
     ev.preventDefault()
     const payload={
+      chat_id: routerParams.chatid,
       first_name: first_nameRef.current.value,
       last_name: last_nameRef.current.value,
       email: emailRef.current.value,
       phone: phoneRef.current.value
     }
-    debugger
-    const response = await fetch("http://192.168.237.14:8000/user/createUser",{
-      method:"POST",
-      headers:{
-        'Content-Type': "application/json",
-      },
-      body:{
-        "data": payload
-      }
-    })
-    //debugger
-    const res = await response.json()
+    console.log(payload);
+    // axiosClient.post("/user/createUser", payload)
+    //   .then(({data})=>{
+    //     navigate('/')
+    //   })
+
+
   }
 
 
   return(
     <div className="container text-center">
       <div className="row">
-        <img src="https://nethammer.online/images/logo.png" alt="" />
+        <img src="https://nethammer.online/images/logo.png" alt=""/>
       </div>
       <div className="row">
       <div>
+      <form class="row g-3 needs-validation" noValidate/>
       <label for="exampleFormControlInput1" class="form-label">Чтобы оставить отзыв или обратиться необходимо зарегистрироваться.</label>
       </div>
         <div class="mb-1 mt-3">
-          <input ref={first_nameRef} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Имя"/>
+          <input ref={first_nameRef} for="validationCustom01" type="text" class="form-control" id="alidationCustom01" placeholder="Имя" required/>
         </div>
         <div class="mb-2 mt-3">
       <input ref={last_nameRef} type="text"  class="form-control" id="exampleFormControlInput2" placeholder="Фамилия"/>
@@ -54,8 +57,8 @@ function Login(){
       </div>
       </div>
       <div class="d-grid gap-2">
-        <button type="button" class="btn "onClick={ev => {onSubmit(ev)}} style={{background: '#6f42c1',color:"#ffffff"}} >Отправить</button>
-
+        <Link to="/course" type="Submit" class="btn" onClick={ev => {onSubmit(ev)}} style={{background: '#8c64d8',color:"#ffffff"}}>Отправить</Link>
+        <form/>
       </div>
     </div>   
   )
