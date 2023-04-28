@@ -24,10 +24,10 @@ function Login(){
       phone: phoneRef.current.value
     }
     console.log(payload);
-    // axiosClient.post("/user/createUser", payload)
-    //   .then(({data})=>{
-    //     navigate('/')
-    //   })
+    axiosClient.post("/createUser", payload)
+      .then(({data})=>{
+        navigate(`/${routerParams.chatid}/main`)
+      })
 
 
   }
@@ -40,7 +40,6 @@ function Login(){
       </div>
       <div className="row">
       <div>
-      <form class="row g-3 needs-validation" noValidate/>
       <label for="exampleFormControlInput1" class="form-label">Чтобы оставить отзыв или обратиться необходимо зарегистрироваться.</label>
       </div>
         <div class="mb-1 mt-3">
@@ -49,6 +48,7 @@ function Login(){
         <div class="mb-2 mt-3">
       <input ref={last_nameRef} type="text"  class="form-control" id="exampleFormControlInput2" placeholder="Фамилия"/>
           </div>
+         
           <div class="mb-3 mt-3">
       <input ref={emailRef} type="email" class="form-control" id="exampleFormControlInput3" placeholder="email@"/>
         </div>
@@ -57,8 +57,8 @@ function Login(){
       </div>
       </div>
       <div class="d-grid gap-2">
-        <Link to="/course" type="Submit" class="btn" onClick={ev => {onSubmit(ev)}} style={{background: '#8c64d8',color:"#ffffff"}}>Отправить</Link>
-        <form/>
+        <Link to={`/${routerParams.chatid}/main`} type="Submit" class="btn" onClick={ev => {onSubmit(ev)}} style={{background: '#8c64d8',color:"#ffffff"}}>Отправить</Link>
+        
       </div>
     </div>   
   )

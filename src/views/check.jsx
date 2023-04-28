@@ -15,13 +15,13 @@ function Check(){
         const payload = {
             'data': routerParams.chatid
         }
-        axiosClient.post("/user/getUserId",payload)
+        axiosClient.post("/getUserId",payload)
         .then((response)=>{
             if(response.data=="True"){
-                navigate('/')
+                navigate(`/${routerParams.chatid}/main`)
             }
             else{
-                navigate(`/login/${routerParams.chatid}`)
+                navigate(`/${routerParams.chatid}/login`)
             }
         })
     }
